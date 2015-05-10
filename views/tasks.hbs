@@ -1,0 +1,35 @@
+<h2>Список задач <a href="/?sort=priority" class="btn btn-info">Сортировать по приоритету</a></h2>
+<table class="table table-striped">
+<tr>
+    <td>#</td>
+    <td>Задача</td>
+    <td>Приоритет</td>
+    <td></td>
+    <td></td>
+</tr>
+{{#each tasks}}
+<tr>
+    <td>{{id}}</td>
+    <td>{{task}} </td>
+    <td>{{priority}}</td>
+
+	<td>
+	<button data-task="{{task}}" class="btn btn-warning" onclick="$(this).next().show();$(this).hide();">Изменить</button>
+		<div style="overflow: hidden; display: none">
+    	   <form method="POST" action="/change">
+           	    <input type="hidden" value="{{id}}" name="id"/>
+           	    <input type="text" value="{{task}}" name="task"/>
+           	    <input type="text" value="{{priority}}" name="priority"/>
+           	    <input type="submit" class="btn btn-success" value="Сохранить">
+           </form>
+    	</div>
+    </td>
+    <td>
+	<form method="POST" action="/delete">
+	    <input type="hidden" value="{{id}}" name="id"/>
+	    <input class="btn btn btn-danger" type="submit" value="Удалить">
+    </form>
+    </td>
+</tr>
+{{/each}}
+</table>
